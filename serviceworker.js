@@ -1,4 +1,4 @@
-const CACHE_NAME = "coffee-pwa-v4"; // <- Cambia a v4 para forzar actualización
+const CACHE_NAME = "coffee-pwa-v6";
 
 const assets = [
   "./",
