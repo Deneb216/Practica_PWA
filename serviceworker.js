@@ -6,7 +6,7 @@ const assets = [
   "./detalles.html", 
   "./Css/style.css", // <--- C mayúscula
   "./Js/app.js",
-  "./Images/coffee1.jpg", // <--- Mayúscula
+  "./Images/coffee1.JPG", // <--- Mayúscula
   "./Images/coffee2.jpg", // <--- Minúsculas desde aquí...
   "./Images/coffee3.jpg",
   "./Images/coffee4.jpg",

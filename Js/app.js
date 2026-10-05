@@ -1,7 +1,7 @@
 const coffees = [
   { 
     name: "Americano Clásico", 
-    image: "Images/coffee1.jpg", // <--- Esta se queda en mayúscula
+    image: "Images/coffee1.JPG", // <--- Esta se queda en mayúscula
     description: "Café negro tradicional servido en taza blanca con plato, ideal para disfrutar su sabor puro.",
     extraInfo: "☕ Origen: Chiapas | 🔥 Tueste: Medio-Oscuro. Perfecto para acompañar con un pan dulce."
   },
