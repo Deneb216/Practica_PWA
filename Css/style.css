@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #dde3ef;
+    font-family: "Nunito", sans-serif;
+    font-size: 1rem;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+}
+
+li {
+    margin-right: 1rem;
+}
+
+h1 {
+    color: rgb(35, 47, 220);
+    margin-bottom: 0.5rem;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card h2 {
+    color: #333;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.card p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    text-align: left;
+    flex-grow: 1;
+}
+
+/* Estilos del botón: Sencillo y curioso */
+.btn-ver-mas {
+    background-color: transparent;
+    color: #555; 
+    border: 1px solid #ddd; 
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px; 
+    font-size: 0.9rem;
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center; 
+}
+
+.btn-ver-mas:hover {
+    color: rgb(35, 47, 220);
+    border-color: rgb(35, 47, 220);
+    background-color: #f0f4fa; 
+    transform: translateY(-2px); 
+}
+
+/* =========================================
+   Estilos para expandir información extra
+   ========================================= */
+.more-info {
+    display: none; /* Oculto por defecto */
+    margin-bottom: 1.2rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed #ccc;
+    font-size: 0.9rem;
+    color: #444;
+    text-align: left;
+}
+
+.more-info p {
+    margin-bottom: 0;
+}
+
+/* Al presionar el botón, JS añade esta clase para mostrarlo */
+.more-info.active {
+    display: block;
+    animation: fadeInExpand 0.3s ease-in-out;
+}
+
+@keyframes fadeInExpand {
+    from { 
+        opacity: 0; 
+        transform: translateY(-5px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
