@@ -1,21 +1,21 @@
-const CACHE_NAME = "coffee-pwa-v3"; // Subimos a v3
+const CACHE_NAME = "coffee-pwa-v4"; // <- Cambia a v4 para forzar actualización
 
 const assets = [
   "./",
   "./index.html",
   "./detalles.html", 
-  "./css/style.css",
+  "./Css/style.css", // <--- C mayúscula
   "./Js/app.js",
-  "./Images/coffee1.JPG",
-  "./Images/coffee2.JPG",
-  "./Images/coffee3.JPG",
-  "./Images/coffee4.JPG",
-  "./Images/coffee5.JPG",
-  "./Images/coffee6.JPG",
-  "./Images/coffee7.JPG",
-  "./Images/coffee8.JPG",
-  "./Images/coffee9.JPG",
-  "./Images/coffee10.JPG"
+  "./Images/coffee1.jpg", // <--- Mayúscula
+  "./Images/coffee2.jpg", // <--- Minúsculas desde aquí...
+  "./Images/coffee3.jpg",
+  "./Images/coffee4.jpg",
+  "./Images/coffee5.jpg",
+  "./Images/coffee6.jpg",
+  "./Images/coffee7.jpg",
+  "./Images/coffee8.jpg",
+  "./Images/coffee9.jpg",
+  "./Images/coffee10.jpg"
 ];
 
 self.addEventListener("install", installEvent => {
