@@ -1,34 +1,35 @@
-const CACHE_NAME = "coffee-pwa-v6";
+const CACHE_NAME = "coffee-pwa-v7";
 
 const assets = [
-  "./",
-  "./index.html",
-  "./detalles.html", 
-  "./Css/style.css", // <--- C mayúscula
-  "./Js/app.js",
-  "./Images/coffee1.JPG", // <--- Mayúscula
-  "./Images/coffee2.jpg", // <--- Minúsculas desde aquí...
-  "./Images/coffee3.jpg",
-  "./Images/coffee4.jpg",
-  "./Images/coffee5.jpg",
-  "./Images/coffee6.jpg",
-  "./Images/coffee7.jpg",
-  "./Images/coffee8.jpg",
-  "./Images/coffee9.jpg",
-  "./Images/coffee10.jpg"
+  "/Practica_PWA/",
+  "/Practica_PWA/index.html",
+  "/Practica_PWA/detalles.html", 
+  "/Practica_PWA/Css/style.css",
+  "/Practica_PWA/Js/app.js",
+  "/Practica_PWA/manifest.json",
+  "/Practica_PWA/Images/coffee1.JPG",
+  "/Practica_PWA/Images/coffee2.jpg",
+  "/Practica_PWA/Images/coffee3.jpg",
+  "/Practica_PWA/Images/coffee4.jpg",
+  "/Practica_PWA/Images/coffee5.jpg",
+  "/Practica_PWA/Images/coffee6.jpg",
+  "/Practica_PWA/Images/coffee7.jpg",
+  "/Practica_PWA/Images/coffee8.jpg",
+  "/Practica_PWA/Images/coffee9.jpg",
+  "/Practica_PWA/Images/coffee10.jpg"
 ];
 
 self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      cache.addAll(assets);
+      return cache.addAll(assets);
     })
   );
 });
 
 self.addEventListener("fetch", fetchEvent => {
   fetchEvent.respondWith(
-    caches.match(fetchEvent.request).then(res => {
+    caches.match(fetchEvent.request, { ignoreSearch: true }).then(res => {
       return res || fetch(fetchEvent.request);
     })
   );
