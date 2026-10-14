@@ -1,4 +1,4 @@
-const CACHE_NAME = "coffee-pwa-v9"; // Subimos versión
+const CACHE_NAME = "coffee-pwa-v9"; // Versión actualizada
 
 const assets = [
   "/Practica_PWA/",
@@ -16,9 +16,18 @@ const assets = [
   "/Practica_PWA/Images/coffee7.jpg",
   "/Practica_PWA/Images/coffee8.jpg",
   "/Practica_PWA/Images/coffee9.jpg",
-  "/Practica_PWA/Images/coffee10.jpg"
+  "/Practica_PWA/Images/coffee10.jpg",
+  "/Practica_PWA/Images/icons/icon-72x72.png",
+  "/Practica_PWA/Images/icons/icon-96x96.png",
+  "/Practica_PWA/Images/icons/icon-128x128.png",
+  "/Practica_PWA/Images/icons/icon-144x144.png",
+  "/Practica_PWA/Images/icons/icon-152x152.png",
+  "/Practica_PWA/Images/icons/icon-192x192.png",
+  "/Practica_PWA/Images/icons/Music-384x384.png",
+  "/Practica_PWA/Images/icons/Music-512x512.png"
 ];
 
+// INSTALACIÓN: Guarda los archivos en el caché inicial
 self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
@@ -35,9 +44,19 @@ self.addEventListener("install", installEvent => {
   );
 });
 
-// Asegúrate de subir la versión de tu caché en la primera línea del archivo
-// const CACHE_NAME = "coffee-pwa-v7"; 
+// ACTIVACIÓN: Limpia los cachés viejos (v1, v2... v8) para no usar memoria extra
+self.addEventListener("activate", activateEvent => {
+  activateEvent.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.filter(key => key !== CACHE_NAME)
+            .map(key => caches.delete(key))
+      );
+    })
+  );
+});
 
+// PETICIONES (FETCH): Estrategias Cache First y Network First
 self.addEventListener("fetch", fetchEvent => {
   const request = fetchEvent.request;
 
@@ -62,7 +81,7 @@ self.addEventListener("fetch", fetchEvent => {
   }
 
   // 2. ESTRATEGIA NETWORK FIRST (Red primero, si falla, Caché)
-  // Se aplica a los documentos HTML (index.html, detalles.html)
+  // Se aplica a los documentos HTML (index.html, detalles.html, manifest)
   fetchEvent.respondWith(
     fetch(request)
       .then(networkResponse => {
