@@ -1,4 +1,4 @@
-const CACHE_NAME = "coffee-pwa-v8"; // Subimos versión
+const CACHE_NAME = "coffee-pwa-v9"; // Subimos versión
 
 const assets = [
   "/Practica_PWA/",
@@ -35,10 +35,46 @@ self.addEventListener("install", installEvent => {
   );
 });
 
+// Asegúrate de subir la versión de tu caché en la primera línea del archivo
+// const CACHE_NAME = "coffee-pwa-v7"; 
+
 self.addEventListener("fetch", fetchEvent => {
+  const request = fetchEvent.request;
+
+  // 1. ESTRATEGIA CACHE FIRST (Caché primero, si no, Red)
+  // Se aplica a imágenes, hojas de estilo (CSS) y scripts (JS)
+  if (request.destination === 'image' || request.destination === 'style' || request.destination === 'script') {
+    fetchEvent.respondWith(
+      caches.match(request).then(cachedResponse => {
+        if (cachedResponse) {
+          return cachedResponse; // Devuelve el archivo desde la caché
+        }
+        // Si no está en caché, lo busca en la red
+        return fetch(request).then(networkResponse => {
+          return caches.open(CACHE_NAME).then(cache => {
+            cache.put(request, networkResponse.clone());
+            return networkResponse;
+          });
+        });
+      })
+    );
+    return; // Termina la ejecución para este tipo de archivos
+  }
+
+  // 2. ESTRATEGIA NETWORK FIRST (Red primero, si falla, Caché)
+  // Se aplica a los documentos HTML (index.html, detalles.html)
   fetchEvent.respondWith(
-    caches.match(fetchEvent.request, { ignoreSearch: true }).then(res => {
-      return res || fetch(fetchEvent.request);
-    })
+    fetch(request)
+      .then(networkResponse => {
+        // Si hay internet, guarda la versión más nueva en caché y la muestra
+        return caches.open(CACHE_NAME).then(cache => {
+          cache.put(request, networkResponse.clone());
+          return networkResponse;
+        });
+      })
+      .catch(() => {
+        // Si no hay internet (falla la red), muestra la versión guardada en caché
+        return caches.match(request);
+      })
   );
 });
